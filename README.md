@@ -1,6 +1,6 @@
 # Term Deposit Calculator
 
-A Ruby-based command-line tool for calculating term deposit returns with different payment frequencies.
+A Ruby-based command-line tool for calculating term deposit.
 ## Requirements
 
 - Ruby 3.0.0 or higher
