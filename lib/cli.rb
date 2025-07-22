@@ -9,7 +9,7 @@ module CLI
     extend Dry::CLI::Registry
 
     class Calculate < Dry::CLI::Command
-      desc 'Calculate term deposit returns with different payment frequencies'
+      desc 'Calculate term deposit with different payment frequencies'
 
       option :principal,
              type: :float, aliases: ['p'],
