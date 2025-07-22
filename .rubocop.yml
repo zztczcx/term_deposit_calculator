@@ -1,0 +1,8 @@
+# RuboCop configuration for deposit calculator
+
+Style/Documentation:
+  Enabled: false
+
+# Optional: Set target Ruby version
+AllCops:
+  TargetRubyVersion: 3.0 

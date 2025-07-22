@@ -40,7 +40,7 @@ module CLI
         )
         final_balance = calculator.calculate_final_balance
 
-        display_results(final_balance.round(2))
+        display_results(final_balance)
       rescue ArgumentError => e
         puts "Argument Error: #{e.message}"
         puts "Run 'term_deposit_calc.rb calculate --help' for usage information."
