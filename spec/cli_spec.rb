@@ -43,7 +43,7 @@ RSpec.describe CLI::Commands::Calculate do
     it 'prints the correct final balance for payment at maturity' do
       expect do
         command.call(principal: 10_000.0, rate: 1.10, term: 3, frequency: 'at_maturity')
-      end.to output(eq("The Final balance is: $10330.0.\n")).to_stdout
+      end.to output(eq("The Final balance is: $10330.00.\n")).to_stdout
     end
 
     it 'prints the correct final balance for quarterly compounding' do

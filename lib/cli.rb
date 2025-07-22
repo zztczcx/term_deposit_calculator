@@ -62,7 +62,7 @@ module CLI
       end
 
       def display_results(final_balance)
-        puts "The Final balance is: $#{final_balance}."
+        puts "The Final balance is: $#{'%.2f' % final_balance}."
       end
     end
 
