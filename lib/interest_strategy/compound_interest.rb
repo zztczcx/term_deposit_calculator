@@ -13,6 +13,7 @@ module InterestStrategy
     }.freeze
 
     def initialize(frequency)
+      super
       @frequency = frequency
     end
 
