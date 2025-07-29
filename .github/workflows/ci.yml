@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ruby-version: ['3.3']
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Run RSpec tests
+      run: bundle exec rspec
+
+    - name: Run smoke tests
+      run: |
+        echo "Test 1: Simple interest calculation (at maturity)"
+        output1=$(bundle exec ruby term_deposit_calc.rb calculate --principal 10000 --rate 1.10 --term 3 --frequency at_maturity)
+        echo "Output: $output1"
+        expected1="The Final balance is: \$10330.00."
+
+        # Verify exact match
+        if [[ "$output1" == "$expected1" ]]; then
+          echo "✅ Simple interest test passed"
+        else
+          echo "❌ Simple interest test failed"
+          echo "Expected: $expected1"
+          echo "Got: $output1"
+          exit 1
+        fi
+
+        echo "Test 2: Compound interest calculation (quarterly)"
+        output2=$(bundle exec ruby term_deposit_calc.rb calculate --principal 5000 --rate 2.5 --term 2 --frequency quarterly)
+        echo "Output: $output2"
+        expected2="The Final balance is: \$5255.54."
+
+        # Verify exact match
+        if [[ "$output2" == "$expected2" ]]; then
+          echo "✅ Compound interest test passed"
+        else
+          echo "❌ Compound interest test failed"
+          echo "Expected: $expected2"
+          echo "Got: $output2"
+          exit 1
+        fi
+
+        echo "All smoke tests passed! 🎉"
