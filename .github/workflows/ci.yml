@@ -28,13 +28,11 @@ jobs:
 
     - name: Run smoke tests
       run: |
-        echo "Running smoke tests based on README examples..."
-
         echo "Test 1: Simple interest calculation (at maturity)"
-        output1=$(ruby term_deposit_calc.rb calculate --principal 10000 --rate 1.10 --term 3 --frequency at_maturity)
+        output1=$(bundle exec ruby term_deposit_calc.rb calculate --principal 10000 --rate 1.10 --term 3 --frequency at_maturity)
         echo "Output: $output1"
         expected1="The Final balance is: \$10330.00."
-        
+
         # Verify exact match
         if [[ "$output1" == "$expected1" ]]; then
           echo "✅ Simple interest test passed"
@@ -46,7 +44,7 @@ jobs:
         fi
 
         echo "Test 2: Compound interest calculation (quarterly)"
-        output2=$(ruby term_deposit_calc.rb calculate --principal 5000 --rate 2.5 --term 2 --frequency quarterly)
+        output2=$(bundle exec ruby term_deposit_calc.rb calculate --principal 5000 --rate 2.5 --term 2 --frequency quarterly)
         echo "Output: $output2"
         expected2="The Final balance is: \$5255.54."
 
